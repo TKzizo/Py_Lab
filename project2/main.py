@@ -1,10 +1,15 @@
+import os
+
 def Drawer(board):
+	print()
+	print(" ---"*9)
 	for x in board:
 		print(end="| ")
 		for y in x:
 			for z in y:
 				print(z,end=" | ")
 		print()
+		print(" ---"*9)
 	print()
 
 def checkrow(line):
@@ -12,14 +17,11 @@ def checkrow(line):
 	for x in line:
 		for y in x:
 			l.append(y)
-	print(l)		
-	print(len(l) == len(set(l)),"1")
 	return len(l) == len(set(l))
 
 
 def checkcolumn(row):
 		
-	print(len(row) == len(set(row)),"2")
 	return len(row) == len(set(row))
 
 def checker(board):
@@ -28,13 +30,13 @@ def checker(board):
 	grid = []
 	#checking lines
 	for i in board:
-		booleen = booleen and checkrow(i)
+		booleen = checkrow(i)
 	#cheking column
 	for x in range(3):
 		for y in range(3):
 			for z in range(9):
 				row.append(board[z][x][y])
-			booleen = booleen and checkcolumn(row)
+			booleen = checkcolumn(row)
 			row = []
 	#checkgrid
 	beg , end = 0,3
@@ -42,16 +44,13 @@ def checker(board):
 		for _ in range(3):
 			for b in range(beg,end):
 				grid.append(board[b][a])
-				print(grid)
-			booleen = booleen and checkrow(grid)
+			booleen = checkrow(grid)
 			grid = []
-			print("grid emptied")
 			beg +=3
 			end +=3
-		print("another row or rows")
 		beg = 0
 		end = 3 
-	print("finished checkin")
+	print("finished checking \n")
 	return booleen
 
 def fill_grid():
@@ -83,27 +82,12 @@ board = [[[0 for x in range(3)] for y in range(3)] for z in range(10)]
 Drawer(board)
 
 board = fill_grid()
+
+_ = os.system("clear")
 Drawer(board)
 
 if checker(board):
-	print("yes")
+	print("yes, that's correct")
 else:
-	print("NO")
+	print("NO, that's not correct")
 	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
